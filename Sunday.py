@@ -687,12 +687,13 @@ def detect_ongoing_activity(user_message):
             content = content.strip()
 
         parsed = json.loads(content)
+        app.logger.info(f"[proactive] classifier result: {parsed}")
         if parsed.get("is_activity") and str(parsed.get("task", "")).strip():
             return str(parsed["task"]).strip()
     except Exception:
         # Classification is best-effort: on any failure, fail safe by not
         # creating a proactive task rather than guessing.
-        pass
+        app.logger.exception("[proactive] detect_ongoing_activity failed")
 
     return None
 
@@ -733,6 +734,7 @@ def generate_followup_message(task):
         content = response.json()["choices"][0]["message"]["content"].strip()
         return content.strip('"') or f"How's {task} going?"
     except Exception:
+        app.logger.exception("[proactive] generate_followup_message failed")
         return f"How's {task} going?"
 
 
@@ -781,8 +783,10 @@ def handle_incoming_message_for_proactive(chat_id, text):
                 now + timedelta(minutes=PROACTIVE_FOLLOWUP_MINUTES)
             ).isoformat(),
             "awaiting_response": False,
+            
         }
         _save_proactive_state(state)
+        app.logger.info(f"[proactive] task stored for {key}: {task!r}, due {state[key]['follow_up_due_at']}")
 
 
 def check_activity_followup_due():
@@ -804,6 +808,7 @@ def check_activity_followup_due():
         entry = state.get(key)
 
         if not entry or not entry.get("active") or entry.get("awaiting_response"):
+            app.logger.info(f"[proactive] followup check: no active/due entry for {key} -> {entry}")
             return None
 
         try:
@@ -812,6 +817,7 @@ def check_activity_followup_due():
             return None
 
         if now < due_at:
+            app.logger.info(f"[proactive] not due yet: now={now.isoformat()} due={due_at.isoformat()}")
             return None
 
         task = entry.get("task") or "what you were working on"
