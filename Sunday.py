@@ -562,7 +562,7 @@ def telegram_send(chat_id, text):
 # near TELEGRAM_CHAT_ID) is the only real trigger, so you can verify the
 # plumbing works end-to-end before anything smarter is added.
 
-PROACTIVE_CHECK_INTERVAL_SECONDS = 60
+PROACTIVE_CHECK_INTERVAL_SECONDS = 30
 
 # Guards so the one-off startup test message can only ever fire once, no
 # matter how many times the loop ticks, and so the background thread can
