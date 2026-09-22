@@ -478,7 +478,7 @@ TELEGRAM_MESSAGE_LIMIT = 4096
 # {"id": ...} field of the update (e.g. log it inside telegram_webhook, or
 # use a helper bot like @userinfobot on Telegram).
 # =============================================================================
-TELEGRAM_CHAT_ID = 0
+TELEGRAM_CHAT_ID = 7092229633
 
 # >>> EDIT THIS <<<
 # Set to True to make Sunday send exactly ONE test message to
@@ -490,7 +490,7 @@ PROACTIVE_TEST_ON_START = False
 # How long Sunday waits, after you mention an ongoing activity, before
 # checking in if you haven't messaged again. Change this one number to
 # make follow-ups fire sooner or later - nothing else needs to change.
-PROACTIVE_FOLLOWUP_MINUTES = 15
+PROACTIVE_FOLLOWUP_MINUTES = 1
 
 # Where the temporary "what are you currently working on" state is
 # persisted (as JSON), so it survives a normal server restart instead of
