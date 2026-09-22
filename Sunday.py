@@ -478,13 +478,13 @@ TELEGRAM_MESSAGE_LIMIT = 4096
 # {"id": ...} field of the update (e.g. log it inside telegram_webhook, or
 # use a helper bot like @userinfobot on Telegram).
 # =============================================================================
-TELEGRAM_CHAT_ID = 0
+TELEGRAM_CHAT_ID = 7092229633
 
 # >>> EDIT THIS <<<
 # Set to True to make Sunday send exactly ONE test message to
 # TELEGRAM_CHAT_ID right after the server starts, proving proactive
 # messaging works. Set back to False once you've confirmed it.
-PROACTIVE_TEST_ON_START = False
+PROACTIVE_TEST_ON_START = True
 
 
 def telegram_action(chat_id, action):
