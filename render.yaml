@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sunday
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn Sunday:app
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: N2YO_API_KEY
+        sync: false
+      - key: nasa_key
+        sync: false
+      - key: tavily
+        sync: false
