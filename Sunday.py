@@ -657,17 +657,17 @@ IST = timezone(timedelta(hours=5, minutes=30))
 
 # How often she gets a chance to decide (LLM call happens at most this
 # often, regardless of how frequently proactive_tick() itself runs).
-AMBIENT_CHECK_INTERVAL_MINUTES = 15
+AMBIENT_CHECK_INTERVAL_MINUTES = 3
 
 # Minimum real gap enforced between two ambient messages, so "no hard cap"
 # on her judgment doesn't turn into spam - this is a safety rail, not a
 # content decision.
-AMBIENT_MIN_GAP_HOURS = 3
+AMBIENT_MIN_GAP_HOURS = 0
 
 # No ambient messages sent inside this local IST window (24h clock) -
 # purely a courtesy so she never wakes you up, not a judgment call.
-AMBIENT_QUIET_HOURS_START = 23  # 11 PM
-AMBIENT_QUIET_HOURS_END = 7     # 7 AM
+AMBIENT_QUIET_HOURS_START = 3 # 11 PM
+AMBIENT_QUIET_HOURS_END = 4     # 7 AM
 
 AMBIENT_STATE_FILE = "JSON/ambient_state.json"
 USER_NOTES_FILE = "JSON/user_notes.json"
